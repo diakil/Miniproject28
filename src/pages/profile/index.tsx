@@ -2,19 +2,22 @@ import ListName from "@/components/listName";
 import Image from "next/image";
 import { useState } from "react";
 
+
+
 const Profile = () => {
-  //   var userName = "Gilang";
-  const [userName, setUserName] = useState<string>("T-rex");
+  //var userName = "Diah";
+  const [userName, setUserName] = useState<string>("engkol");
   const [urutan, setUrutan] = useState<number>(-1);
   const changeUserName = (userData: string, index: number) => {
+    console.log('user', userData);
     setUserName(userData);
     setUrutan(index);
   };
-  const arrayNama = ["Gilang", "Febri", "Apif", "Fatih"];
+  const arrayNama = ["diah", "budi", "bedu", "bunga"];
 
   return (
     <div
-      className={`flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black`}
+      className={`flex min-h-screen items-center justify-center bg-zinc-50 font-sans`}
     >
       <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
         <Image
@@ -27,24 +30,24 @@ const Profile = () => {
         />
         <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
           <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            Nama saya, {userName} dengan index asli {urutan}
+            Nama saya, {userName} dengan urutan {urutan}
           </h1>
           <div>List Nama User</div>
           <div>
             {arrayNama.map((singleName: string, index: number) => {
-              return (
+              return( 
                 <ListName
-                  key={index}
-                  userName={singleName}
-                  indexList={index}
-                  changeFunction={() => changeUserName(singleName, index)}
-                />
+                key={index}
+                userName={singleName}
+                indexList={index}
+                changeFunction={() => changeUserName(singleName, index)}
+              />
               );
             })}
           </div>
-          <div
-            className="cursor-pointer bg-red-900 p-4 hover:bg-red-400"
-            onClick={() => changeUserName("Gilang parameter", 100)}
+          <div 
+          className="cursor-pointer bg-red-900 p-4 hover:bg-red-400" 
+          onClick={() => changeUserName("diah parameter", 100)}
           >
             Ganti username dong
           </div>
