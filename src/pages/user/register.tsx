@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ToastContainer, toast } from 'react-toastify';
 
 const RegisterPage = () => {
   const [registerData, setRegisterData] = useState<any>({
@@ -23,14 +24,21 @@ const RegisterPage = () => {
     const data = await response.json();
     if (data.token) {
       setRegisterStatus("Berhasil register");
+      toast('Berhasil Register!')
     } else {
       setRegisterStatus("Gagal register");
+      toast('Gagal Register!')
     }
     console.log("register", data);
   };
   return (
   <div className="container mx-auto">
+    <ToastContainer />
+    <div>
+      <div className="felx"></div>
+      <div>Register</div>
     <div className="flex gap-4">
+      
       <div>
           <label 
           htmlFor="email"
@@ -74,9 +82,59 @@ const RegisterPage = () => {
           className="bg-blue-900 text-white px-3 py-2 rounded mt-4 max-w-fit cursor-pointer hover-opacity-80"
           >
             Submit
-            </div>
+          </div>
         </div>
-        <div><div>{registerStatus}</div></div>
+        <div>
+          <div>Register</div>
+    <div className="flex gap-4">
+      
+      <div>
+          <label 
+          htmlFor="email"
+          className="block mb-2.5 text-sm font-medium text-heading"
+        >
+          Email
+          </label>
+          <input 
+          type="email"
+          id="email" 
+          className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" 
+          placeholder="Email"
+          onChange={(e: any) => {
+            setRegisterData({ ...registerData, email: e.target.value});
+          }}
+            required 
+            />
+        </div>
+        <div>
+          <label 
+            htmlFor="last_name" 
+            className="block mb-2.5 text-sm font-medium text-heading"
+          >
+            Password
+          </label>
+          <input 
+            type="password" 
+            id="last_name" 
+            className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body" 
+            placeholder="Password"
+            onChange={(e: any) => {
+            setRegisterData({ ...registerData, password: e.target.value});
+          }}
+             required 
+             />
+             </div>
+        </div>
+        <div>
+          <div 
+          onClick={() => submitRegister()}
+          className="bg-blue-900 text-white px-3 py-2 rounded mt-4 max-w-fit cursor-pointer hover-opacity-80"
+          >
+            Submit
+          </div>
+        </div>
+        </div>
+    </div>
     </div>
   );
 };
